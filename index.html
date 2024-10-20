@@ -1,0 +1,97 @@
+<html>
+    <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+    </head>
+
+
+    <body>
+        <input id="fusion" type="text" value="1-5">
+        <input id="xyz" type="text" value="3-6">
+        <button id="button" onclick="runCode()">Calculate</button>
+        <div id="plot">
+
+        </div>
+    </body>
+</html>
+
+<script>
+    var fusion = document.getElementById("fusion");
+    var xyz = document.getElementById("xyz");
+
+    var fusionList = [1,2,3,4,5];
+    var xyzList = [3,4,5,6];
+
+    function createList(start, end) {
+        var myList = [];
+        for (var i = start; i <= end; i++) {
+            myList.push(i);
+        }
+        return myList;
+    }
+
+    function createPoints(fusionList, xyzList) {
+        var cardCount = [];
+        var level = [];
+        var label = [];
+        for (var f of fusionList) {
+            for (var x of xyzList) {
+                cardCount.push(Number(f)+Number(x)+Number(x));
+                level.push(Number(f)+Number(x));
+                label.push(f.toString()+"+"+x.toString());
+            }
+        }
+        return {cardCount, level, label};
+    }
+    /*---------------------------------Graph---------------------------------------------*/
+    var xvalues = [7, 9, 11, 13, 8, 10, 12, 14, 9, 11, 13, 15, 10, 12, 14, 16, 11, 13, 15, 17];
+    var yvalues = [4, 5, 6, 7, 5, 6, 7, 8, 6, 7, 8, 9, 7, 8, 9, 10, 8, 9, 10, 11];
+
+    var trace1 = {
+    x: xvalues,
+    y: yvalues,
+    mode: 'markers',
+    type: 'scatter'
+    };
+
+    var data = [trace1];
+
+    var layout = {
+        xaxis: {
+            title: "Card Count",
+            showgrid: true,
+            dtick: 1,
+        },
+        yaxis: {
+            title: "Level",
+            showgrid: true,
+            dtick: 1,
+        }
+    }
+
+    Plotly.newPlot('plot', data, layout);
+
+
+    /* -----------------------------------------------------------------------------------*/
+    function runCode() {
+        fusionList = createList(fusion.value.split("-")[0], fusion.value.split("-")[1]);
+        xyzList = createList(xyz.value.split("-")[0], xyz.value.split("-")[1]);
+        /*console.log(fusionList);
+        console.log(xyzList);*/
+        /*var values = createPoints(fusionList, xyzList);
+        xvalues = values.cardCount;
+        yvalues = values.level;
+        */
+    }
+
+    fusion.addEventListener("change", function(){
+        var values = createPoints(fusionList, xyzList);
+        xvalues = values.cardCount;
+        yvalues = values.level;
+    });
+ 
+    /* figuyre out how to update plot points without using the button 
+    figure out how to set range limits 
+    figure out how to set labels per point if possible*/
+
+</script>
