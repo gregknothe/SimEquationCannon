@@ -20,6 +20,48 @@
         <div id="plot">
 
         </div>
+
+        <br>
+        <button type="button" class="collapsible">FAQ</button>
+        <div class="FAQ">
+            <div class="FAQHowToUse">
+                <b>Parameters</b>:<br>
+                <div style="text-indent: 4%;">
+                    <b>● fusion</b>: the range of fusion monster levels in your extra deck.<br>
+                </div>
+                <div style="text-indent: 4%;">
+                    <b>● xyz</b>: the range of xyz monster levels in your extra deck.
+                </div>
+            </div>
+            <div class="FAQText1">
+                <div class="FAQText1_1">
+                    <p><a href="https://ygoprodeck.com/card/simultaneous-equation-cannons-14345"><img src="cannon.jpg" id="cannonImg"></a></p>
+                </div>
+                <div class="FAQText1_2">
+                    <b>Simultanious Equation Cannons</b><br>
+                    [Trap Card] <br>
+                    Banish 1 Fusion Monster and 2 Xyz Monsters with the same Rank from your Extra Deck, whose combined Level and Ranks equal the total number of cards in both players' hands and on the field, then you can apply this effect. <br>
+                    ● Return 2 of your banished monsters to the Extra Deck (1 Xyz and 1 Fusion) whose combined Level and Rank equal the Level or Rank of 1 face-up monster your opponent controls, then banish all cards they control. <br>
+                </div>
+            </div>
+            <div class="FAQText2">
+                To resolve "Simultaneous Equation Cannons" you must solve, get this, two equations at the same time:
+                <div class="equationArea">
+                    <div class="equations">
+                        f + 2x = c <br>
+                        f + x = l <br>
+                    </div>
+                    <div class="equationLabels">
+                        f: fusion level <br>
+                        x: xyz level <br>
+                        c: card count (field and hand) <br>
+                        l: level of targeted monster opponent controls <br>
+                    </div>
+                </div>
+                You can simplfy these equations, but thats some nerd stuff, so just use the graph above.
+                If you wanted to see a more mathmatical approach, I would recommend watching <a href="https://youtu.be/s7ItqV_ayIg?si=Q2OAVUfD9ZXKYfnB" style="color: white;"> Stevie Blunder's video</a> on the topic.
+            </div>
+        </div>
     </body>
 </html>
 
@@ -133,8 +175,22 @@
         yvalues = values.level;
     });*/
  
-    /* figuyre out how to update plot points without using the button 
-    figure out how to set range limits 
-    figure out how to set labels per point if possible*/
+    /*clean up final code
+    write faq at the bottom
+    link to card*/
 
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+}
 </script>
